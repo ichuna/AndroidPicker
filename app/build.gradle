@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+ext {
+    isLibrary = false
+}
+
+android {
+
+    buildTypes {
+        release {
+            //是否zip优化
+            zipAlignEnabled true
+            //是否移除无用的资源，造成：specified for property 'resourceFile' does not exist.
+            //shrinkResources true
+            //是否混淆
+            minifyEnabled true
+            //混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    compile 'com.alibaba:fastjson:1.1.55.android'
+    compile project(':library:WheelPicker')
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //添加以下三行特性，编译就通不过，同步都不能完成。
+//    compile "com.android.support:appcompat-v7:25.3.1"
+    //compile "com.android.support:recyclerview-v7:$support_version"
+    // compile "com.android.support:design:$support_version"
+//
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.anko:anko-common:$anko_version"
+   // compile "com.android.support:support-annotations:${support_version}"
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+}
